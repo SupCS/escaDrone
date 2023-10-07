@@ -1,4 +1,4 @@
-.container {
+  .container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.header {
+.login__header {
   margin: 30px 0 40px 0;
   color: #fff;
   font-size: 36px;
@@ -23,6 +23,7 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
 input {

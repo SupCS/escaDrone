@@ -6,7 +6,9 @@ const LoginPage = () => {
   return (
     <div className="container">
       <div className="formContainer">
-        <div className="header">Вхід в аккаунт</div>
+        <div className="login__header">
+          Вхід в аккаунт
+        </div>
         <input
           id="loginInput"
           type="text"
