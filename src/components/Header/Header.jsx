@@ -12,7 +12,7 @@ function Header() {
             <img src={headerLogo} alt="Лого" className="header-logo" />
             <div className="right-links">
                 <a href="#" className="header-link">Дрон інфо</a>
-                <a href="#" className="header-link">Контакти</a>
+                <a href="/contacts" className="header-link">Контакти</a>
             </div>
         </div>
     );

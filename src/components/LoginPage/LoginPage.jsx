@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 const LoginPage = () => {
   return (
     <div className="container">
+      <div className="loginPage__container">
       <div className="formContainer">
         <div className="login__header">
           Вхід в аккаунт
@@ -24,6 +25,7 @@ const LoginPage = () => {
         <button className="button">Увійти</button>
       </div>
       <Footer />
+      </div>
     </div>
   );
 };
