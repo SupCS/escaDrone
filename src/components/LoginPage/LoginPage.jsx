@@ -1,6 +1,6 @@
 import React from "react";
 import "./LoginPage.css";
-import iconSvg from "../../assets/images/Brigada5.svg";
+import Footer from "../Footer/Footer";
 
 const LoginPage = () => {
   return (
@@ -23,7 +23,7 @@ const LoginPage = () => {
         />
         <button className="button">Увійти</button>
       </div>
-      <img src={iconSvg} alt="Icon description" className="svgIcon" />
+      <Footer />
     </div>
   );
 };
