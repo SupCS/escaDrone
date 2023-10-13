@@ -1,0 +1,101 @@
+.contacts__header {
+    display: flex;
+    justify-content: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.contacts-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.contacts-info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.contacts-info h3 {
+    margin-bottom: 15px;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.contacts-info p {
+    margin: 0;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 15px;
+}
+
+.contacts-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts-form h3 {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.contacts-form input,
+.contacts-form textarea {
+    background-color: transparent; /* делаем фон прозрачным */
+    border: none; /* убираем все границы */
+    border-bottom: 2px solid #FFF; /* добавляем только нижнюю границу */
+    margin-bottom: 20px;
+    padding: 10px 0; /* добавляем верхний и нижний отступы */
+    outline: none; /* убираем стандартную рамку при фокусе */
+    color: #FFF; /* делаем текст белым */
+    font-family: Montserrat; /* применяем ваш шрифт */
+    font-size: 16px; /* размер шрифта */
+    transition: border-color 0.3s ease; /* плавный переход для границы */
+}
+
+/* Эффект при фокусе на инпут или textarea */
+.contacts-form input:focus,
+.contacts-form textarea:focus {
+    border-color: #aaa; /* меняем цвет границы при фокусе */
+}
+
+
+.contacts-form button {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    width: 200px;
+    height: 59px;
+    background: #d9d9d9;
+    border-radius: 50px;
+    text-transform: uppercase;
+    border-style: none;
+}
+
+.contacts-form button:hover {
+    transform: scale(1.1);
+    transition: 0.5s all ease;
+    border: 1px black solid;
+    box-shadow: 0 0 5px 2px black;
+}
