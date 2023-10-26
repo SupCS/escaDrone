@@ -7,8 +7,22 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [usernameError, setUsernameError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
 
   const handleLogin = async () => {
+    setUsernameError(null);
+    setPasswordError(null);
+
+    if (!username) {
+      setUsernameError("Поле 'Логін' має бути заповнено");
+      return;
+    }
+
+    if (!password) {
+      setPasswordError("Поле 'Пароль' має бути заповнено");
+      return;
+    }
     const result = await loginUser(username, password);
     if (result) {
       setMessage("Успішний вхід!");
@@ -31,6 +45,7 @@ const LoginPage = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {usernameError && <p className="error">{usernameError}</p>}
           <input
             id="passwordInput"
             type="password"
@@ -39,6 +54,7 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {passwordError && <p className="error">{passwordError}</p>}
           <button className="button" onClick={handleLogin}>
             Увійти
           </button>
