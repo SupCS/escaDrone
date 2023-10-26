@@ -18,6 +18,31 @@ describe("LoginPage tests", () => {
     expect(passwordInput).toBeInTheDocument();
   });
 
+  it("shows error message when username is empty", async () => {
+    const { getByText } = render(<LoginPage />);
+    const loginButton = getByText("Увійти");
+
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      expect(getByText("Поле 'Логін' має бути заповнено")).toBeInTheDocument();
+    });
+  });
+
+  it("shows error message when password is empty", async () => {
+    const { getByText, getByPlaceholderText } = render(<LoginPage />);
+    const loginButton = getByText("Увійти");
+
+    const loginInput = getByPlaceholderText("Логін");
+
+    fireEvent.change(loginInput, { target: { value: "testuser" } });
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      expect(getByText("Поле 'Пароль' має бути заповнено")).toBeInTheDocument();
+    });
+  });
+
   it("shows success message on successful login", async () => {
     loginUser.mockResolvedValueOnce(true);
 
