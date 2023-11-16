@@ -2,6 +2,11 @@
   margin: 0 auto;
   margin-top: 70px;
   width: 1140px;
+  margin-bottom: 120px;
+}
+
+.carouselComponent {
+  margin-bottom: 160px;
 }
 
 .carouselContainer {
@@ -64,4 +69,132 @@ img {
 
 .optionContainer.right {
   margin-left: -115px;
+}
+
+.buttonContainer {
+  padding-top: 45px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.orderButton {
+  width: 100%;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  width: 200px;
+  height: 59px;
+  background: #d9d9d9;
+  border-radius: 50px;
+  text-transform: uppercase;
+  border-style: none;
+}
+
+.orderButton:hover {
+  transform: scale(1.1);
+  transition: 0.5s all ease;
+  border: 1px black solid;
+  box-shadow: 0 0 5px 2px black;
+}
+
+.tableContainer {
+  background-color: #394424;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableHeader {
+  text-transform: uppercase;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 30px 0;
+}
+
+.inventContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding-right: 74px;
+  padding-left: 74px;
+  margin-bottom: 50px;
+}
+
+.inventItem {
+  width: 100%;
+  background-color: #b3b5b0;
+  border-radius: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.inventItemLeft {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.tableImageContainer {
+  max-width: 245px;
+}
+
+.inventItemText h3 {
+  margin: 0;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inventItemText p {
+  margin: 0;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inventItemRight {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.inventItemRight h4 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.itemStatus {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 20px;
+  background: #d9d9d9;
+  margin-left: 10px;
+}
+
+.itemStatus p {
+  margin: 0;
+  padding: 5px;
+  text-transform: uppercase;
 }
