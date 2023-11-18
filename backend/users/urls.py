@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path('users/', views.ListUsers.as_view()),
     path('user-check/', views.CheckUser.as_view()),
+    path('user-drones/<str:username>/', views.UserDrones.as_view()),
 ]

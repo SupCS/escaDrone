@@ -21,3 +21,15 @@ export const loginUser = async (username, password) => {
   const data = await response.json();
   return data.message;
 };
+
+export const getUserDrones = async (username) => {
+  const response = await fetch(`/api/user-drones/${username}`, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  return await response.json();
+};

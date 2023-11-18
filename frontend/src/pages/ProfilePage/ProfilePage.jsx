@@ -3,7 +3,9 @@ import Header from "../../components/Header/Header";
 import drone from "../../assets/images/DronePic.svg";
 import styles from "./ProfilePage.module.css";
 import infoIcon from "./../../assets/images/infoIcon.svg";
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../AuthContext";
+import { getUserDrones } from "../../api";
 
 const DroneOption = ({ className }) => {
   return (
@@ -34,24 +36,25 @@ const Carousel = () => {
   );
 };
 
-const Table = () => {
+const Table = ({ drones }) => {
   return (
     <div className={styles.tableComponent}>
       <div className={styles.tableContainer}>
         <h2 className={styles.tableHeader}>Інвентар</h2>
         <div className={styles.inventContainer}>
-          <TableItem></TableItem>
-          <TableItem></TableItem>
-          <TableItem></TableItem>
+          {drones.map((drone) => (
+            <TableItem key={drone.serial_number} drone={drone} />
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-const TableItem = () => {
+const TableItem = ({ drone }) => {
   const statuses = ["OK", "Damaged", "Destroyed"];
   const [statusIndex, setStatusIndex] = useState(0);
+  const { name, image, serial_number, status } = drone;
 
   const toggleStatus = () => {
     // Set the next status, cycling back to the first after the last
@@ -78,11 +81,11 @@ const TableItem = () => {
     <div className={styles.inventItem}>
       <div className={styles.inventItemLeft}>
         <div className={styles.tableImageContainer}>
-          <img src={drone} alt="drone"></img>
+          <img src={image} alt="drone"></img>
         </div>
         <div className={styles.inventItemText}>
-          <h3>DJI Mavic 3T</h3>
-          <p>XX000001</p>
+          <h3>{name}</h3>
+          <p>{serial_number}</p>
         </div>
       </div>
       <div className={styles.inventItemRight} onClick={toggleStatus}>
@@ -96,12 +99,27 @@ const TableItem = () => {
 };
 
 function ProfilePage() {
+  const { user } = useContext(AuthContext);
+  const [drones, setDrones] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      getUserDrones(user)
+        .then((data) => {
+          setDrones(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data: ", error);
+        });
+    }
+  }, [user]);
+
   return (
     <div>
       <Header />
       <div className={styles.container}>
         <Carousel></Carousel>
-        <Table></Table>
+        <Table drones={drones}></Table>
       </div>
       <Footer />
     </div>
