@@ -1,7 +1,9 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import "./LoginPage.css";
 import Footer from "../../components/Footer/Footer";
 import { loginUser } from "../../api";
+import { AuthContext } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +11,9 @@ const LoginPage = () => {
   const [message, setMessage] = useState(null);
   const [usernameError, setUsernameError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
     setUsernameError(null);
@@ -25,6 +30,8 @@ const LoginPage = () => {
     }
     const result = await loginUser(username, password);
     if (result) {
+      login(username);
+      navigate("/profile");
       setMessage("Успішний вхід!");
       // Сюди вставимо якусь дію
     } else {

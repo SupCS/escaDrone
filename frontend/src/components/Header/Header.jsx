@@ -1,7 +1,10 @@
+import React, { useContext } from "react";
 import "./Header.css";
 import headerLogo from "../../assets/images/headerlogo.png";
+import { AuthContext } from "../../AuthContext";
 
 function Header() {
+  const { user } = useContext(AuthContext);
   return (
     <div className="header">
       <div className="left-links">
@@ -21,6 +24,7 @@ function Header() {
           Контакти
         </a>
       </div>
+      {user && <p>Залогінений як: {user}</p>}
     </div>
   );
 }
