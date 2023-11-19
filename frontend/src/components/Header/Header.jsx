@@ -2,9 +2,15 @@ import React, { useContext } from "react";
 import "./Header.css";
 import headerLogo from "../../assets/images/headerlogo.png";
 import { AuthContext } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <div className="header">
       <div className="left-links">
@@ -24,7 +30,10 @@ function Header() {
           Контакти
         </a>
       </div>
-      {user && <p>Залогінений як: {user}</p>}
+      <div>
+        {user && <p>Залогінений як: {user}</p>}
+        <button onClick={handleLogout}>Вийти</button>
+      </div>
     </div>
   );
 }
