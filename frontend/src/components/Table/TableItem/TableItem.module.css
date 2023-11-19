@@ -1,0 +1,71 @@
+.inventItem {
+  width: 100%;
+  background-color: #b3b5b0;
+  border-radius: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.inventItemLeft {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.tableImageContainer {
+  max-width: 245px;
+}
+
+.inventItemText h3 {
+  margin: 0;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inventItemText p {
+  margin: 0;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inventItemRight {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.inventItemRight h4 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.itemStatus {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 20px;
+  background: #d9d9d9;
+  margin-left: 10px;
+}
+
+.itemStatus p {
+  margin: 0;
+  padding: 5px;
+  text-transform: uppercase;
+}

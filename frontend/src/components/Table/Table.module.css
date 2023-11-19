@@ -1,0 +1,27 @@
+.tableContainer {
+  background-color: #394424;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableHeader {
+  text-transform: uppercase;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 30px 0;
+}
+
+.inventContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding-right: 74px;
+  padding-left: 74px;
+  margin-bottom: 50px;
+}

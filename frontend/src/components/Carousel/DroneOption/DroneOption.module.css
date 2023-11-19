@@ -1,0 +1,53 @@
+.name {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: -40px;
+}
+
+.optionContainer {
+  margin: 0 auto;
+  width: 558px;
+  height: 458px;
+  background-color: #7b9b3e;
+  border-radius: 30px;
+  border: 5px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.optionContainer.center {
+  z-index: 2;
+}
+
+img {
+  width: 100%;
+}
+
+.image {
+  max-width: 390px;
+}
+
+.info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.optionContainer.left,
+.optionContainer.right {
+  transform: scale(0.8);
+}
+
+.optionContainer.left {
+  margin-right: -115px;
+}
+
+.optionContainer.right {
+  margin-left: -115px;
+}
