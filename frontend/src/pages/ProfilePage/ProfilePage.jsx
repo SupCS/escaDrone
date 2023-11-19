@@ -5,7 +5,7 @@ import styles from "./ProfilePage.module.css";
 import infoIcon from "./../../assets/images/infoIcon.svg";
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../AuthContext";
-import { getUserDrones } from "../../api";
+import { getUserDrones, updateDroneStatus } from "../../api";
 
 const DroneOption = ({ className }) => {
   return (
@@ -52,13 +52,21 @@ const Table = ({ drones }) => {
 };
 
 const TableItem = ({ drone }) => {
-  const statuses = ["OK", "Damaged", "Destroyed"];
-  const [statusIndex, setStatusIndex] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState(drone.status);
   const { name, image, serial_number, status } = drone;
 
+  const statuses = ["OK", "Damaged", "Destroyed"];
+
+  const getNextStatus = (status) => {
+    const currentIndex = statuses.indexOf(status);
+    const nextIndex = (currentIndex + 1) % statuses.length;
+    return statuses[nextIndex];
+  };
+
   const toggleStatus = () => {
-    // Set the next status, cycling back to the first after the last
-    setStatusIndex((prevIndex) => (prevIndex + 1) % statuses.length);
+    const newStatus = getNextStatus(currentStatus);
+    setCurrentStatus(newStatus);
+    updateDroneStatus(serial_number, newStatus).catch(console.error);
   };
 
   const getStatusStyles = (status) => {
@@ -70,11 +78,10 @@ const TableItem = ({ drone }) => {
       case "Destroyed":
         return { color: "red", text: "Знищено" };
       default:
-        return { color: "black", text: "Не відомо" };
+        return { color: "black", text: "Невідомо" };
     }
   };
 
-  const currentStatus = statuses[statusIndex];
   const { color, text } = getStatusStyles(currentStatus);
 
   return (

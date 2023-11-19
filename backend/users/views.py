@@ -36,3 +36,16 @@ class UserDrones(APIView):
         drones = Drone.objects.filter(owner=user)
         serializer = DroneSerializer(drones, many=True)
         return Response(serializer.data)
+
+
+class UpdateDroneStatus(APIView):
+    def post(self, request):
+        data = request.data
+        serial_number = data.get('serial_number')
+        new_status = data.get('status')
+
+        drone = Drone.objects.get(serial_number=serial_number)
+        drone.status = new_status
+        drone.save()
+
+        return Response({'message': 'Status updated successfully'})
