@@ -1,44 +1,68 @@
 .header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    height: 128px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 128px;
+  margin-top: 20px;
+  position: relative;
 }
 
 .header-logo {
-    grid-column: 2/3;
-    width: 182px;
-    height: 128px;
+  grid-column: 2/3;
+  width: 182px;
+  height: 128px;
 }
 
 .left-links {
-    display: flex;
-    justify-content: flex-end;
-    grid-column: 1/2;
+  display: flex;
+  justify-content: flex-end;
+  grid-column: 1/2;
 }
 
 .right-links {
-    display: flex;
-    justify-content: flex-start;
-    grid-column: 3/4;
+  display: flex;
+  justify-content: flex-start;
+  grid-column: 3/4;
 }
 
 .header-link {
-    text-decoration: none;
-    color: #000;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
 .right-links .header-link:first-child {
-    margin: 0 50px;
+  margin: 0 50px;
 }
 
 .left-links .header-link:last-child {
-    margin: 0 50px;
+  margin: 0 50px;
+}
+
+.profile-container {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.profileIcon {
+  width: 50px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 75%;
+  right: -5px;
+  color: #fff;
+  background-color: #000;
+  padding: 5px;
 }
