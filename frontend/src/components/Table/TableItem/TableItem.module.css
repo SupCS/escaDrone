@@ -17,6 +17,10 @@
   max-width: 245px;
 }
 
+.tableImageContainer img {
+  width: 100%;
+}
+
 .inventItemText h3 {
   margin: 0;
   color: #000;
