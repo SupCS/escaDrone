@@ -1,16 +1,32 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import { loginUser } from "../../api";
+import { AuthContext } from "../../AuthContext";
 
 // Mock для функции loginUser
 jest.mock("../../api", () => ({
   loginUser: jest.fn(),
 }));
 
+// Мокові дані для AuthContext
+const mockAuthValue = {
+  login: jest.fn(), // Мокова функція або якісь конкретні дані
+};
+
 describe("LoginPage tests", () => {
+  const renderWithRouterAndContext = (component) => {
+    return render(
+      <BrowserRouter>
+        <AuthContext.Provider value={mockAuthValue}>
+          {component}
+        </AuthContext.Provider>
+      </BrowserRouter>
+    );
+  };
   it("renders login and password input", () => {
-    const { getByPlaceholderText } = render(<LoginPage />);
+    const { getByPlaceholderText } = renderWithRouterAndContext(<LoginPage />);
     const loginInput = getByPlaceholderText("Логін");
     const passwordInput = getByPlaceholderText("Пароль");
 
@@ -19,7 +35,7 @@ describe("LoginPage tests", () => {
   });
 
   it("shows error message when username is empty", async () => {
-    const { getByText } = render(<LoginPage />);
+    const { getByText } = renderWithRouterAndContext(<LoginPage />);
     const loginButton = getByText("Увійти");
 
     fireEvent.click(loginButton);
@@ -30,7 +46,9 @@ describe("LoginPage tests", () => {
   });
 
   it("shows error message when password is empty", async () => {
-    const { getByText, getByPlaceholderText } = render(<LoginPage />);
+    const { getByText, getByPlaceholderText } = renderWithRouterAndContext(
+      <LoginPage />
+    );
     const loginButton = getByText("Увійти");
 
     const loginInput = getByPlaceholderText("Логін");
@@ -46,7 +64,9 @@ describe("LoginPage tests", () => {
   it("shows success message on successful login", async () => {
     loginUser.mockResolvedValueOnce(true);
 
-    const { getByPlaceholderText, getByText } = render(<LoginPage />);
+    const { getByPlaceholderText, getByText } = renderWithRouterAndContext(
+      <LoginPage />
+    );
     const loginInput = getByPlaceholderText("Логін");
     const passwordInput = getByPlaceholderText("Пароль");
     const loginButton = getByText("Увійти");
@@ -62,7 +82,9 @@ describe("LoginPage tests", () => {
   it("shows failure message on unsuccessful login", async () => {
     loginUser.mockResolvedValueOnce(false); // имитируем неудачный ответ от API
 
-    const { getByPlaceholderText, getByText } = render(<LoginPage />);
+    const { getByPlaceholderText, getByText } = renderWithRouterAndContext(
+      <LoginPage />
+    );
     const loginInput = getByPlaceholderText("Логін");
     const passwordInput = getByPlaceholderText("Пароль");
     const loginButton = getByText("Увійти");
