@@ -6,6 +6,7 @@ import { AuthContext } from "../../AuthContext";
 import { getUserDrones } from "../../api";
 import Carousel from "../../components/Carousel/Carousel";
 import Table from "../../components/Table/Table";
+import DroneStorageComponent from "../../components/DroneStorage";
 
 function ProfilePage() {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,12 @@ function ProfilePage() {
     <div>
       <Header />
       <div className={styles.container}>
-        <Carousel></Carousel>
+        {/* <Carousel></Carousel> */}
+        <DroneStorageComponent
+          user={user}
+          getUserDrones={getUserDrones}
+          setDrones={setDrones}
+        />
         <Table drones={drones}></Table>
       </div>
       <Footer />

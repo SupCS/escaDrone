@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import UserA
-from .models import Drone
+from .models import UserA, Drone, DroneStorage
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -18,3 +17,4 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(UserA, UserAdmin)
 admin.site.register(Drone)
+admin.site.register(DroneStorage)

@@ -52,9 +52,56 @@ export const updateDroneStatus = async (serialNumber, newStatus) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-
-    // Обработка ответа от сервера (если необходимо)
   } catch (error) {
     console.error("Error updating drone status: ", error);
+  }
+};
+
+export const DroneStorageList = async () => {
+  try {
+    const response = await fetch("/api/drone-storage/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching drone storage data: ", error);
+    throw error;
+  }
+};
+
+export const AddDroneToInventory = async (droneModel, username) => {
+  try {
+    const response = await fetch(`/api/add-drone-to-inventory/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        droneModel: droneModel,
+        username: username,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      if (response.status === 400) {
+        throw new Error("Немає доступних дронів");
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding drone to inventory: ", error);
+    throw error;
   }
 };

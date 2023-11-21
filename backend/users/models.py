@@ -39,3 +39,13 @@ class Drone(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DroneStorage(models.Model):
+    model = models.CharField(max_length=100)
+    image = models.CharField(
+        max_length=255, default='https://example.com/default-drone-image.png')
+    quantity = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.model

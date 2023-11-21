@@ -1,12 +1,12 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import UserA, Drone
-from .serializers import TaskSerializer
+from .models import UserA, Drone, DroneStorage
+from .serializers import TaskSerializer, DroneSerializer, DroneStorageSerializer
 import json
-from django.http import JsonResponse
-from .serializers import DroneSerializer
+import random
 
 
 class ListUsers(APIView):
@@ -49,3 +49,61 @@ class UpdateDroneStatus(APIView):
         drone.save()
 
         return Response({'message': 'Status updated successfully'})
+
+
+class DroneStorageList(APIView):
+    def get(self, request):
+        drones = DroneStorage.objects.all()
+        serializer = DroneStorageSerializer(drones, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = DroneStorageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AddDroneToInventory(APIView):
+    def post(self, request):
+        try:
+            # Отримати параметри з тіла запиту
+            data = request.data
+            droneModel = data.get('droneModel')
+            username = data.get('username')
+
+            # Знайти дрон на складі за моделлю
+            drone_storage = DroneStorage.objects.get(model=droneModel)
+
+            if drone_storage.quantity > 0:
+                # Знайти користувача за ім'ям
+                user = UserA.objects.get(username=username)
+                # Створити новий дрон та зберегти його
+                Drone.objects.create(
+                    name=drone_storage.model,
+                    image=drone_storage.image,
+                    serial_number=generate_unique_serial_number(),
+                    status='ok',  # Статус за замовчуванням
+                    owner=user,
+                )
+
+                # Оновлення кількості на складі
+                drone_storage.quantity -= 1
+                drone_storage.save()
+
+                return Response({'message': 'Запит створено. Поставка в дорозі!'}, status=status.HTTP_201_CREATED)
+            else:
+                return Response({'message': 'На складі немає доступних дронів'}, status=status.HTTP_400_BAD_REQUEST)
+        except DroneStorage.DoesNotExist:
+            return Response({'message': 'Дрон на складі не знайдено'}, status=status.HTTP_404_NOT_FOUND)
+
+
+def generate_unique_serial_number():
+    while True:
+        # Генеруємо випадковий серійний номер з 6 чисел
+        serial_number = ''.join(random.choices('0123456789', k=6))
+
+        # Перевіряємо чи нема вже такого
+        if not Drone.objects.filter(serial_number=serial_number).exists():
+            return serial_number
