@@ -7,6 +7,7 @@ import TestPage from "./pages/TestPage/TestPage";
 import DroneListPage from "./pages/DroneListPage/DroneListPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { AuthProvider } from "./AuthContext";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -15,10 +16,31 @@ function App() {
         <Routes>
           <Route path="/test" element={<TestPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
+          <Route
+            path="/contacts"
+            element={
+              <ProtectedRoute>
+                <ContactsPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/dronelist" element={<DroneListPage />} />
-          <Route path="/planning" element={<PlanningPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/planning"
+            element={
+              <ProtectedRoute>
+                <PlanningPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
