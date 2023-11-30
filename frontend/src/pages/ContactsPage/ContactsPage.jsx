@@ -30,7 +30,7 @@ function MyNewPage() {
                             <h3>Пропозиції та запитання</h3>
                             <input type="text" placeholder="Ім'я" />
                             <input type="email" placeholder="Електронна адреса" />
-                            <textarea placeholder="Ваше повідомлення"></textarea>
+                            <textarea class="area" placeholder="Ваше повідомлення"></textarea>
                             <button type="submit">Відправити</button>
                         </div>
                     </div>
