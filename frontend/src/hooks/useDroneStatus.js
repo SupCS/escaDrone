@@ -7,9 +7,9 @@ const useDroneStatus = (initialStatus, serialNumber) => {
   const statuses = ["ok", "damaged", "destroyed"];
 
   const getNextStatus = (status) => {
-    if (status === 'destroyed'){
-        return statuses[2]
-    } 
+    if (status === "destroyed") {
+      return statuses[2];
+    }
     const currentIndex = statuses.indexOf(status);
     const nextIndex = (currentIndex + 1) % statuses.length;
     console.log(status);

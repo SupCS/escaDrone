@@ -11,4 +11,5 @@ urlpatterns = [
          name='drone-storage-list'),
     path('add-drone-to-inventory/', views.AddDroneToInventory.as_view(),
          name='add-drone-to-inventory'),
+    path('send-email/', views.SendEmail.as_view(), name='send_email'),
 ]

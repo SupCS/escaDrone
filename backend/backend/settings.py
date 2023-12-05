@@ -131,3 +131,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'bffc7e496edfbd'
+EMAIL_HOST_PASSWORD = '6dc8ae329d92e5'
+EMAIL_PORT = '2525'

@@ -7,6 +7,7 @@ from .models import UserA, Drone, DroneStorage
 from .serializers import TaskSerializer, DroneSerializer, DroneStorageSerializer
 import json
 import random
+from django.core.mail import send_mail
 
 
 class ListUsers(APIView):
@@ -107,3 +108,24 @@ def generate_unique_serial_number():
         # Перевіряємо чи нема вже такого
         if not Drone.objects.filter(serial_number=serial_number).exists():
             return serial_number
+
+
+class SendEmail(APIView):
+    def post(self, request):
+        # Отримання данних з запиту
+        name = request.data.get('name')
+        email = request.data.get('email')
+        message = request.data.get('message')
+
+        # Формування і відправлення на email
+        try:
+            send_mail(
+                subject=f'Нове повідомлення від {name}',
+                message=message,
+                from_email=email,
+                recipient_list=['supezbiz@gmail.com'],
+                fail_silently=False,
+            )
+            return Response({'status': 'Email sent successfully'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
