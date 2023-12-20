@@ -49,3 +49,16 @@ class DroneStorage(models.Model):
 
     def __str__(self):
         return self.model
+
+
+class Flight(models.Model):
+    drone = models.ForeignKey(Drone, on_delete=models.CASCADE)
+    purpose = models.TextField()
+    start_coordinates = models.CharField(max_length=100)
+    end_coordinates = models.CharField(max_length=100)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def __str__(self):
+        return f"Flight for {self.drone.name} on {self.date}"

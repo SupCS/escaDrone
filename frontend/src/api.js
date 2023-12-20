@@ -153,3 +153,30 @@ export const removeDroneFromInventory = async (serialNumber) => {
     throw error;
   }
 };
+
+export const createFlight = async (flightData) => {
+  console.log("Sending flight data:", flightData); // Вывод отправляемых данных
+
+  try {
+    const response = await fetch("/api/create-flight/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(flightData),
+    });
+
+    if (!response.ok) {
+      console.error("Response not ok:", response);
+      const errorResponse = await response.text(); // Получаем текст ошибки
+      throw new Error(`Network response was not ok: ${errorResponse}`);
+    }
+
+    const responseData = await response.json();
+    console.log("Response data:", responseData); // Вывод полученного ответа
+    return responseData;
+  } catch (error) {
+    console.error("Error creating flight: ", error);
+    throw error;
+  }
+};
