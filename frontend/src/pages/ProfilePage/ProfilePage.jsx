@@ -24,6 +24,9 @@ function ProfilePage() {
     }
   }, [user]);
 
+  const handleDroneRemove = (serialNumber) => {
+    setDrones(drones.filter((drone) => drone.serial_number !== serialNumber));
+  };
   return (
     <div>
       <Header />
@@ -34,7 +37,7 @@ function ProfilePage() {
           getUserDrones={getUserDrones}
           setDrones={setDrones}
         />
-        <Table drones={drones}></Table>
+        <Table drones={drones} onRemove={handleDroneRemove}></Table>
       </div>
       <Footer />
     </div>

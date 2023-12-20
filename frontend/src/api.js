@@ -130,3 +130,26 @@ export const sendFeedback = async (name, email, message) => {
     throw error;
   }
 };
+
+export const removeDroneFromInventory = async (serialNumber) => {
+  try {
+    const response = await fetch(`/api/remove-drone-from-inventory/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        serial_number: serialNumber,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error removing drone from inventory: ", error);
+    throw error;
+  }
+};

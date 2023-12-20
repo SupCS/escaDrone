@@ -8,6 +8,7 @@ from .serializers import TaskSerializer, DroneSerializer, DroneStorageSerializer
 import json
 import random
 from django.core.mail import send_mail
+from rest_framework.decorators import api_view
 
 
 class ListUsers(APIView):
@@ -37,6 +38,19 @@ class UserDrones(APIView):
         drones = Drone.objects.filter(owner=user)
         serializer = DroneSerializer(drones, many=True)
         return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def remove_drone_from_inventory(request):
+    data = request.data
+    serial_number = data.get('serial_number')
+
+    try:
+        drone = Drone.objects.get(serial_number=serial_number)
+        drone.delete()
+        return Response({'message': 'Drone removed successfully'}, status=status.HTTP_200_OK)
+    except Drone.DoesNotExist:
+        return Response({'message': 'Drone not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class UpdateDroneStatus(APIView):

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { updateDroneStatus } from "../../../api";
+import { removeDroneFromInventory } from "../../../api";
 import styles from "./TableItem.module.css";
 import useDroneStatus from "../../../hooks/useDroneStatus";
 
-const TableItem = ({ drone }) => {
+const TableItem = ({ drone, onRemove }) => {
   const { name, image, serial_number, status } = drone;
   const { currentStatus, toggleStatus } = useDroneStatus(status, serial_number);
 
@@ -17,6 +17,15 @@ const TableItem = ({ drone }) => {
         return { color: "red", text: "Знищено" };
       default:
         return { color: "black", text: "Невідомо" };
+    }
+  };
+
+  const handleRemove = async () => {
+    try {
+      await removeDroneFromInventory(drone.serial_number);
+      onRemove(drone.serial_number);
+    } catch (error) {
+      console.error("Error removing drone: ", error);
     }
   };
 
@@ -38,6 +47,7 @@ const TableItem = ({ drone }) => {
         <div className={styles.itemStatus} style={{ color }}>
           <p>{text}</p>
         </div>
+        <button onClick={handleRemove}>Видалити</button>
       </div>
     </div>
   );
